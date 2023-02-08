@@ -8,26 +8,11 @@ import type { NextPage, NextPageContext } from "next";
 import { collection, doc, getDoc, getDocs, onSnapshot } from 'firebase/firestore';
 import { db } from "./api/fbase";
 import { CSVLink } from 'react-csv';
+import { findImageBase64ById } from '../libs/firestore/dbUtils';
+
 
 
 const uid = "rXcZaIVRDnTmDTqlW3iWzHKYymJ3"
-
-const findImageBase64ById =async (id:string) =>{
-    return new Promise(function (resolve, reject) {
-        getDoc(
-            doc(
-                db,`dev/${uid}/Image`,id
-            )
-        ).then((snapshots)=>{
-            // console.log(snapshots.data())
-            resolve(snapshots.data().image64)
-        })
-        .catch(error=>{
-            reject(error)
-        })
-      })
-}
-
 const setDragLogByUid = (uid:string, setData)=>{
     const q = collection(db, `dev/${uid}/DragInfo`);
     const data = getDocs(
@@ -54,33 +39,10 @@ const setDragLogByUid = (uid:string, setData)=>{
         setData(dragLog)
 
     }).catch(error=>error)
-
-
-
-    // onSnapshot(q, async (querySnapshot: any) => {
-
-    //     const dragObj = await Promise.all( querySnapshot.docs.map(async (doc: any) => {
-    //         const snapshot = {...doc.data()}
-    //         const imageId = snapshot.id
-    //         // const imageBase64 = findImageBase64ById(imageId).then(image)
-
-    //         return {
-    //             id: doc.id,
-    //             imageId: snapshot.id,
-    //             startedAt_ms: snapshot.startAt_ms,
-    //             endedAt_ms: snapshot.endAt_ms,
-    //             createdAt: snapshot.startAt,
-    //             path:JSON.stringify(snapshot.path),
-    //             imageBase64:await findImageBase64ById(imageId)
-    //         }
-    //     }));
-
-    //     console.log(dragObj)
-    // });
 }
 
 const Download: NextPage = () => {
-    const [isAuthorized, setIsAuthorized] = useState(true)
+    const [isAuthorized, setIsAuthorized] = useState(false)
     const [password, setPassword] = useState("")
     const [data, setData] = useState<any[]>([])
 
