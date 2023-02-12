@@ -1,12 +1,13 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import React, { useState } from "react";
-import { auth } from "./fbase";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import React, { useContext, useEffect, useState } from "react";
+import { auth } from "../libs/firestore/fbase";
 
 const AuthForm = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [newAccount, setNewAccount] = useState(true);
 	const [error, setError] = useState("");
+
 	const onChange = (event: any) => {
 		const {
 			target: { name, value },

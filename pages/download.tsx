@@ -6,67 +6,43 @@ import { useEffect, useRef, useState } from 'react'
 // import { BeneficiaryInfo, ContractorInfo } from '@prisma/client';
 import type { NextPage, NextPageContext } from "next";
 import { collection, doc, getDoc, getDocs, onSnapshot } from 'firebase/firestore';
-import { db } from "./api/fbase";
+import { db } from "../libs/firestore/fbase";
 import { CSVLink } from 'react-csv';
-import { findImageBase64ById } from '../libs/firestore/dbUtils';
+import { findImageBase64ById, setDragLogByUid, setSelectLogByUid } from '../libs/firestore/dbUtils';
 
-
-
-const uid = "rXcZaIVRDnTmDTqlW3iWzHKYymJ3"
-const setDragLogByUid = (uid:string, setData)=>{
-    const q = collection(db, `dev/${uid}/DragInfo`);
-    const data = getDocs(
-        q
-    ).then(async documents=>{
-        const dragLog = await Promise.all(
-
-         documents.docs.map(async doc=>{
-            const snapshot = {...doc.data()}
-            const imageId = snapshot.id
-            // const imageBase64 = findImageBase64ById(imageId).then(image)
-
-            return {
-                id: doc.id,
-                imageId: snapshot.id,
-                startedAt_ms: snapshot.startAt_ms,
-                endedAt_ms: snapshot.endAt_ms,
-                createdAt: snapshot.startAt,
-                path:JSON.stringify(snapshot.path),
-                imageBase64:await findImageBase64ById(imageId)
-            }
-        }))
-
-        setData(dragLog)
-
-    }).catch(error=>error)
-}
 
 const Download: NextPage = () => {
     const [isAuthorized, setIsAuthorized] = useState(false)
     const [password, setPassword] = useState("")
     const [data, setData] = useState<any[]>([])
 
-
     useEffect(() => {
         console.log("sorted data is ", data)
     }, [data])
 
     useEffect(() => {
-        console.log("hello")
-        setDragLogByUid(uid,setData)
-
+        //setDragLogByUid(0, setData) //1st pram : p_index
+        //setDragLogByUid(1, setData)
+        setSelectLogByUid(0, setData)
     }, [])
+
+    // const headers = [
+    //     { label: "로그 아이디", key: "id" },
+    //     { label: "이미지 아이디", key: "imageId" },
+    //     { label: "이미지", key: "imageBase64" },
+    //     { label: "이동시작시간_밀리초", key: "startedAt_ms" },
+    //     { label: "이동종료시간_밀리초", key: "endedAt_ms" },
+    //     { label: "생성시간", key: "createdAt" },
+    //     { label: "경로", key: "path" },
+    // ]
 
     const headers = [
         { label: "로그 아이디", key: "id" },
         { label: "이미지 아이디", key: "imageId" },
         { label: "이미지", key: "imageBase64" },
-        { label: "이동시작시간_밀리초", key: "startedAt_ms" },
-        { label: "이동종료시간_밀리초", key: "endedAt_ms" },
-        { label: "생성시간", key: "createdAt" },
-        { label: "경로", key: "path" },
+        { label: "선택시간", key: "selectedAt" },
+        { label: "선택시간_밀리초", key: "selectedAt_ms" },
     ]
-
 
     return (
         <div

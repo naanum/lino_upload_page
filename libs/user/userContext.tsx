@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 
 
 export interface UserContextType{
+    uid: string | undefined,
     getUid: () => string|undefined,
     setUid: React.Dispatch<React.SetStateAction<string|undefined>>
 }
@@ -17,7 +18,7 @@ const UserContextProvider:React.FC<{
     const getUid = () => uid
 
     return(
-        <UserContext.Provider value={{getUid,setUid}}>
+        <UserContext.Provider value={{uid, getUid,setUid}}>
             {children}
         </UserContext.Provider>
     )

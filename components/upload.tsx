@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { addDoc, collection, onSnapshot } from "firebase/firestore";
-import { db } from "./api/fbase";
+import { db } from "../libs/firestore/fbase";
+import router from "next/router";
 
-export interface UserObj {
-	uid: string | undefined;
-};
-
-type Upload = {
-  userObj: UserObj;
-};
+interface UploadProps {
+  currentUser: string,
+}
 
 export type ImageObj = {
   id: string;
@@ -20,7 +17,9 @@ export type ImageObj = {
   y?:number;
 };
 
-const Upload = ({ userObj }: Upload) => {
+const Upload = (upload: UploadProps) => {
+
+  const { currentUser } = upload;
 
   const [attachment, setAttachment] = useState("");
 
@@ -30,11 +29,11 @@ const Upload = ({ userObj }: Upload) => {
     const imageUpload = {
       createAt_ms: Date.now(),
       createAt: new Date(Date.now()).toString(),
-      createId: userObj.uid,
+      createId: currentUser,
       image64: attachment,
       audioBase64: false,
     };
-    await addDoc(collection(db, `dev/${userObj.uid}/Image`), imageUpload);
+    await addDoc(collection(db, `dev/${currentUser}/Image`), imageUpload);
     setAttachment("");
   };
 
@@ -52,13 +51,17 @@ const Upload = ({ userObj }: Upload) => {
   };
 
   return (
-    <>
+    <div className="upload">
+      <div className="greeting">지금 기분이 어떤가요?</div>
+      { attachment ? <img width="300" src={attachment} /> : null}
       <form onSubmit={onSubmit}>
-        <input type="file" accept="image/*" onChange={onFileChange} />
-        <input type="submit" />
+        <div className="filebox">
+          <label htmlFor="ex_file">업로드</label>
+          <input type="file" accept="image/*" onChange={onFileChange} id="ex_file" />
+        </div>
+        <input type="submit" className="submit"/>
       </form>
-      {attachment ? <img width="300" src={attachment} /> : null}
-    </>
+    </div>
   );
 };
 
