@@ -5,6 +5,7 @@ import router from "next/router";
 import UserContextProvider, { UserContext } from "../libs/user/userContext";
 import Upload from "./upload";
 import Auth from "./auth";
+import MyLock from "./lock";
 
 export default function Home() {
     const [init, setinit] = useState<boolean>(false);

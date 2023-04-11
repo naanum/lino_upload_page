@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { addDoc, collection, onSnapshot } from "firebase/firestore";
 import { db } from "../libs/firestore/fbase";
 import router from "next/router";
+import MyLock from "./lock";
 
 interface UploadProps {
   currentUser: string,
@@ -51,6 +52,7 @@ const Upload = (upload: UploadProps) => {
   };
 
   return (
+    <>
     <div className="upload">
       <div className="greeting">지금 기분이 어떤가요?</div>
       { attachment ? <img width="300" src={attachment} /> : null}
@@ -60,8 +62,12 @@ const Upload = (upload: UploadProps) => {
           <input type="file" accept="image/*" onChange={onFileChange} id="ex_file" />
         </div>
         <input type="submit" className="submit"/>
+        <MyLock currentUser = {currentUser} />
       </form>
+      
     </div>
+    </>
+    
   );
 };
 

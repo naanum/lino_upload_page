@@ -102,15 +102,26 @@ a {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  margin: 20px;
   height: 100vh;
+}
+
+.lock {
+  display: inline-block;
+  line-height: 30px;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  color: navy;
+  background-color: lavender;
+  opacity: 0.6;
+  border-radius: 15px;
+  margin-left: 20px;
 }
 
 form {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 80px;
 }
 
 img {
@@ -159,6 +170,7 @@ img {
   border: 1px solid #ebebeb;
   border-bottom-color: #e2e2e2;
   border-radius: 20px;
+  margin-left: 40px;
 }
 
 .filebox input[type="file"] {  /* 파일 필드 숨기기 */
