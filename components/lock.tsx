@@ -42,6 +42,7 @@ const MyLock = (upload: UploadProps) => {
       isLock : isLock,
     };
     await setDoc(doc(db, `dev/${currentUser}/Lock`, currentUser), lockUpload);
+    await addDoc(collection(db, `dev/${currentUser}/LockLog`), lockUpload);
   }
 
   useEffect(()=>{
