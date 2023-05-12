@@ -2,8 +2,9 @@ import { collection, doc, getDoc, getDocs, onSnapshot } from 'firebase/firestore
 import { db } from './fbase';
 
 const Pcode = [
-    "rXcZaIVRDnTmDTqlW3iWzHKYymJ3", 
-    "bRzuWzccEZPLlBVssuMsSg7fK282",
+    "2mGvahNABxVY7YUB4o3wJQUwOvC2", //p1
+    "lN78nWBK9PafIEzS8mXunk4X0Wd2", //p2
+    "aKBabe09WkbxUMFKYUhXqiERGsx1", //p3
 ];
 
 export const findImageBase64ById = async (index: number, id:string) =>{
