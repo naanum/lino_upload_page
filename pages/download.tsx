@@ -21,28 +21,28 @@ const Download: NextPage = () => {
     }, [data])
 
     useEffect(() => {
-        //setDragLogByUid(0, setData) //1st pram : p_index
+        setDragLogByUid(0, setData) //1st pram : p_index
         //setDragLogByUid(1, setData)
-        setSelectLogByUid(0, setData)
+        //setSelectLogByUid(0, setData)
     }, [])
-
-    // const headers = [
-    //     { label: "로그 아이디", key: "id" },
-    //     { label: "이미지 아이디", key: "imageId" },
-    //     { label: "이미지", key: "imageBase64" },
-    //     { label: "이동시작시간_밀리초", key: "startedAt_ms" },
-    //     { label: "이동종료시간_밀리초", key: "endedAt_ms" },
-    //     { label: "생성시간", key: "createdAt" },
-    //     { label: "경로", key: "path" },
-    // ]
 
     const headers = [
         { label: "로그 아이디", key: "id" },
         { label: "이미지 아이디", key: "imageId" },
         { label: "이미지", key: "imageBase64" },
-        { label: "선택시간", key: "selectedAt" },
-        { label: "선택시간_밀리초", key: "selectedAt_ms" },
+        { label: "이동시작시간_밀리초", key: "startedAt_ms" },
+        { label: "이동종료시간_밀리초", key: "endedAt_ms" },
+        { label: "생성시간", key: "createdAt" },
+        { label: "경로", key: "path" },
     ]
+
+    // const headers = [
+    //     { label: "로그 아이디", key: "id" },
+    //     { label: "이미지 아이디", key: "imageId" },
+    //     { label: "이미지", key: "imageBase64" },
+    //     { label: "선택시간", key: "selectedAt" },
+    //     { label: "선택시간_밀리초", key: "selectedAt_ms" },
+    // ]
 
     return (
         <div
