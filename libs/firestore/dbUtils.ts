@@ -5,6 +5,9 @@ const Pcode = [
     "2mGvahNABxVY7YUB4o3wJQUwOvC2", //p1
     "lN78nWBK9PafIEzS8mXunk4X0Wd2", //p2
     "aKBabe09WkbxUMFKYUhXqiERGsx1", //p3
+    "bLtzx9iDtqcMqL0MIysDN4V81JL2", //p4
+    "lbswijX3yAO6KlExW9UtqGbpZMD3", //p5
+    "D37ZRpV8AJhnyKmQHxdQyYRvfui1" //p6
 ];
 
 export const findImageBase64ById = async (index: number, id:string) =>{
